@@ -12,14 +12,14 @@ TagManager:
   - Water
   - UI
   - 
+  - Uncollidable
+  - Background
+  - Player
+  - Enviroment
+  - Dynamic
+  - OneWay
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Outlined
   - 
   - 
   - 

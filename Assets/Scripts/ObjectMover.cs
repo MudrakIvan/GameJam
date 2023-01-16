@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ObjectMover : MonoBehaviour
 {
-    public Camera Camera;
+    public GameObject Target;
     private Vector3 startPosition;
     private Vector3 cameraStartPosition;
     public float MovementMultiplicator = 1.0f;
@@ -13,13 +13,13 @@ public class ObjectMover : MonoBehaviour
     void Start()
     {
         startPosition = gameObject.transform.position;
-        cameraStartPosition = Camera.transform.position;
+        cameraStartPosition = Target.transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        var cameraPos = Camera.transform.position;
+        var cameraPos = Target.transform.position;
         gameObject.transform.position = startPosition + new Vector3(cameraPos.x - cameraStartPosition.x, cameraPos.y-cameraStartPosition.y, 0)*MovementMultiplicator;
     }
 }
