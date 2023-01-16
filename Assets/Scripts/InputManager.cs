@@ -15,7 +15,7 @@ public class InputManager : MonoBehaviour
 	public bool jump;
 	public bool sprint;
 	public bool crouch;
-	public bool attack;
+	public bool attack = false;
 
 	[Header("Movement Settings")]
 	public bool analogMovement;
@@ -45,8 +45,8 @@ public class InputManager : MonoBehaviour
 	public void OnCrouch(InputValue value)
 	{ CrouchInput(value.isPressed); }
 
-	public void OnClick(InputValue value)
-	{ ClickInput(value.isPressed); }
+	public void OnLeftClick(InputValue value)
+	{ LeftClickInput(value.isPressed); }
 #else
 // old input sys if we do decide to have it (most likely wont)...
 #endif
@@ -67,8 +67,8 @@ public class InputManager : MonoBehaviour
 	public void CrouchInput(bool newCrouchState)
 	{ crouch = newCrouchState; }
 	
-	public void ClickInput(bool newClickState)
-	{ attack = newClickState; }
+	public void LeftClickInput(bool newLeftClickState)
+	{ attack = newLeftClickState; }
 
 #if !UNITY_IOS || !UNITY_ANDROID
 

@@ -325,7 +325,7 @@ MonoBehaviour:
   m_MoveAction: {fileID: -8270582268987380076, guid: e6ad505fb6b17434cb58bfdb5658bb6b, type: 3}
   m_SubmitAction: {fileID: 0}
   m_CancelAction: {fileID: 0}
-  m_LeftClickAction: {fileID: 0}
+  m_LeftClickAction: {fileID: 2941512067254444274, guid: e6ad505fb6b17434cb58bfdb5658bb6b, type: 3}
   m_MiddleClickAction: {fileID: 0}
   m_RightClickAction: {fileID: 0}
   m_ScrollWheelAction: {fileID: 0}
@@ -1100,6 +1100,7 @@ MonoBehaviour:
   jump: 0
   sprint: 0
   crouch: 0
+  attack: 0
   analogMovement: 0
   cursorLocked: 0
   cursorInputForLook: 1
