@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpriteMover : MonoBehaviour
+public class ObjectMover : MonoBehaviour
 {
-    public Camera camera;
+    public Camera Camera;
     private Vector3 startPosition;
     private Vector3 cameraStartPosition;
     public float MovementMultiplicator = 1.0f;
@@ -13,13 +13,13 @@ public class SpriteMover : MonoBehaviour
     void Start()
     {
         startPosition = gameObject.transform.position;
-        cameraStartPosition = camera.transform.position;
+        cameraStartPosition = Camera.transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        var cameraPos = camera.transform.position;
+        var cameraPos = Camera.transform.position;
         gameObject.transform.position = startPosition + new Vector3(cameraPos.x - cameraStartPosition.x, cameraPos.y-cameraStartPosition.y, 0)*MovementMultiplicator;
     }
 }
