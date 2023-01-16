@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class backgorundLoop : MonoBehaviour
+public class BackgorundLoop : MonoBehaviour
 {
     public GameObject[] levels;
 
@@ -27,7 +27,7 @@ public class backgorundLoop : MonoBehaviour
     private void LoadChildObjects(GameObject obj)
     {
         float objectWidth = obj.GetComponent<SpriteRenderer>().bounds.size.x - choke;
-        int childNeeded = (int)Mathf.Ceil(screenBounds.x * 2 / objectWidth);
+        int childNeeded = (int)Mathf.Ceil(screenBounds.x * 2 / objectWidth) + 1; // at least 2 objects are needed
         GameObject clone = Instantiate(obj);
 
         for (int i = 0; i < childNeeded; i++)
