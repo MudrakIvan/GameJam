@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.15510128, g: 0.17702086, b: 0.18931043, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -201,7 +201,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 29368141}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -5}
+  m_LocalPosition: {x: 0.9, y: 0, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -221,8 +221,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levels:
-  - {fileID: 888425474}
   - {fileID: 244327037}
+  - {fileID: 888425474}
   choke: 0
 --- !u!1 &244327037
 GameObject:
@@ -234,6 +234,7 @@ GameObject:
   m_Component:
   - component: {fileID: 244327038}
   - component: {fileID: 244327039}
+  - component: {fileID: 244327040}
   m_Layer: 0
   m_Name: Mountains
   m_TagString: Untagged
@@ -308,6 +309,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &244327040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 244327037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78a6146c8c4d1b5408bc9d6a37862fca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camera: {fileID: 29368143}
+  MovementMultiplicator: 0.8
 --- !u!1 &719270880
 GameObject:
   m_ObjectHideFlags: 0
@@ -337,7 +352,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1
+  m_Intensity: 10000
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -379,7 +394,7 @@ Light:
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
+  m_BounceIntensity: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
@@ -394,14 +409,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 719270880}
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalRotation: {x: 0.036093596, y: -0.091960795, z: 0.028534012, w: 0.9946992}
+  m_LocalPosition: {x: -0.88, y: -0.62, z: -5.49}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 4.419, y: -10.453, z: 2.882}
 --- !u!1 &888425474
 GameObject:
   m_ObjectHideFlags: 0
@@ -412,6 +427,7 @@ GameObject:
   m_Component:
   - component: {fileID: 888425475}
   - component: {fileID: 888425476}
+  - component: {fileID: 888425477}
   m_Layer: 0
   m_Name: Graveyard
   m_TagString: Untagged
@@ -486,6 +502,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &888425477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 888425474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78a6146c8c4d1b5408bc9d6a37862fca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camera: {fileID: 29368143}
+  MovementMultiplicator: 0.2
 --- !u!1 &1218248911
 GameObject:
   m_ObjectHideFlags: 0
@@ -561,6 +591,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1969211170}
   - component: {fileID: 1969211171}
+  - component: {fileID: 1969211172}
   m_Layer: 0
   m_Name: Sky
   m_TagString: Untagged
@@ -635,6 +666,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1969211172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1969211169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78a6146c8c4d1b5408bc9d6a37862fca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camera: {fileID: 29368143}
+  MovementMultiplicator: 1
 --- !u!1 &2029614482
 GameObject:
   m_ObjectHideFlags: 0

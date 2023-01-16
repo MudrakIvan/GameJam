@@ -33,8 +33,9 @@ public class BackgorundLoop : MonoBehaviour
         for (int i = 0; i < childNeeded; i++)
         {
             GameObject child = Instantiate(clone);
+            Destroy(child.GetComponent<SpriteMover>());
             child.transform.SetParent(obj.transform);
-            child.transform.position = new Vector3(objectWidth * i, obj.transform.position.y, obj.transform.position.z);
+            child.transform.position = new Vector3(objectWidth * i, 0, 0) + obj.transform.position;
             child.name = obj.name + i;
         }
 
