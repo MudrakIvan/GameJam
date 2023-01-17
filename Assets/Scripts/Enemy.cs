@@ -139,7 +139,10 @@ public class Enemy : MonoBehaviour
 
         if (collidedObject.name == "Player")
         {
-            Destroy(collidedObject.gameObject);
+            player.Health--;
+            if (player.Health == 0){
+                Destroy(collidedObject.gameObject);
+            }
         }
     }
 

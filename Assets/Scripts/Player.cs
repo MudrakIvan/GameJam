@@ -40,8 +40,13 @@ public class Player : MonoBehaviour
 
 	public float AttackDuration = 0.5f;
 
+	public int MaxHealth = 5;
+
 	[HideInInspector]
 	public bool IsAttacking => mAttackDurationDelta > 0.0f;
+
+	[HideInInspector]
+	public int Health {get; set;}
 
 	private float mTargetHorSpeed;
 	private float mHorizontalSpeed;
@@ -80,6 +85,7 @@ public class Player : MonoBehaviour
         mJumpDurationDelta = 0.0f;
         mFallTimeoutDelta = FallTimeout;
 		mAttackDurationDelta = 0.0f;
+		Health = MaxHealth;
 
         mHeadingRight = true;
     }
