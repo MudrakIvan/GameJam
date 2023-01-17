@@ -11,6 +11,8 @@ public class Enemy : MonoBehaviour
     /// </summary>
     public float OneDiractionWalkTime = 0.5f;
 
+    public float DyingTime = 0.25f;
+
     [Tooltip("Move speed of the character in m/s")]
 	public float Speed = 4.0f;
 
@@ -42,7 +44,6 @@ public class Enemy : MonoBehaviour
 
 	[Tooltip("Time required to pass before entering the fall state. Useful for walking down stairs")]
 	public float FallTimeout = 0.15f;
-
 	private float mTargetHorSpeed;
 	private float mHorizontalSpeed;
 	private float mTargetVerSpeed;
@@ -53,7 +54,9 @@ public class Enemy : MonoBehaviour
 	private float mJumpDurationDelta;
 	private float mFallTimeoutDelta;
 
-    private bool HeadingLeft = true;
+    private bool mDying = false;
+
+    private bool mHeadingLeft = true;
 
     private float TimeOut = 0.0f;
 
@@ -94,21 +97,23 @@ public class Enemy : MonoBehaviour
         TimeOut += Time.deltaTime;
         if (TimeOut >= OneDiractionWalkTime){
             TimeOut = 0.0f;
-            HeadingLeft = !HeadingLeft;
+            mHeadingLeft = !mHeadingLeft;
 			RotateEnemy();
         }
 
-        MoveHorizontal();
-	    JumpAndGravity();
-	    // AnimateCharacter();
-	    
-		var movement = new Vector3(
-			mHorizontalSpeed * ((HeadingLeft) ? -1 : 1),
-			mVerticalSpeed,
-			0.0f
-		);
-		
-	    mController.Move(movement * Time.fixedDeltaTime);
+        AnimateCharacter();
+        if (!mDying)
+        {
+            MoveHorizontal();
+	        JumpAndGravity();
+            var movement = new Vector3(
+                mHorizontalSpeed * ((mHeadingLeft) ? -1 : 1),
+                mVerticalSpeed,
+                0.0f
+            );
+            
+            mController.Move(movement * Time.fixedDeltaTime);
+        }
     }
 
     private void RotateEnemy()
@@ -118,7 +123,7 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collidedObject)
     {
-        if (collidedObject.name != "Player" && collidedObject.name != "Model")
+        if ((collidedObject.name != "Player" && collidedObject.name != "Model") || mDying)
         {
             return;
         }
@@ -127,7 +132,8 @@ public class Enemy : MonoBehaviour
 
         if (player.IsAttacking && collidedObject.name == "Model")
         {
-            Destroy(gameObject);
+            Destroy(gameObject, DyingTime);
+            mDying = true;
             return;
         }
 
@@ -228,16 +234,7 @@ public class Enemy : MonoBehaviour
 	    var animator = mAnimator;
 	    if (animator != null)
 	    {
-			var currentVerticalSpeed = mController.velocity.y;
-			var currentHorizontalSpeed = new Vector3(mController.velocity.x, 0.0f, mController.velocity.z).magnitude;
-			var moveSpeed = Math.Abs(mTargetHorSpeed / MoveSpeedAnimation);
-			var falling = !mController.isGrounded && mFallTimeoutDelta <= 0.0f;
-
-            // Enemy animation do not have ani variables
-			// animator.SetFloat("Speed", currentHorizontalSpeed);
-			// animator.SetFloat("MoveSpeed", moveSpeed);
-			// animator.SetBool("Grounded", mController.isGrounded);
-			// animator.SetBool("Fall", falling);
+            animator.SetBool("Dying", mDying);
 	    }
     }
 }
