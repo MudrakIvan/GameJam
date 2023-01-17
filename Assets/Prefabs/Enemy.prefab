@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 161583007092349516}
   - component: {fileID: 8865417346193942457}
   - component: {fileID: 5573332725110899448}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -205,7 +205,7 @@ MonoBehaviour:
     m_Bits: 5120
   triggerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   oneWayPlatformMask:
     serializedVersion: 2
     m_Bits: 4096
