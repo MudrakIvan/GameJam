@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class ObjectSpawner : MonoBehaviour
 {
+    public bool DestroyEntity = true;
     public GameObject Entity;
     public Vector2[] Positions;
     // Start is called before the first frame update
@@ -16,7 +17,10 @@ public class ObjectSpawner : MonoBehaviour
             clone.transform.parent = gameObject.transform;
             clone.transform.position = Positions[i];
         }
-        Destroy(Entity);
+
+        if (DestroyEntity){
+            Destroy(Entity);
+        }
     }
 
     // Update is called once per frame

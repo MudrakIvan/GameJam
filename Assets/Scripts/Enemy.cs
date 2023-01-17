@@ -8,25 +8,25 @@ public class Enemy : MonoBehaviour
     /// <summary>
     /// Time before the enemy will turn around
     /// </summary>
-    public float oneDiractionWalkTime = 0.5f;
+    public float OneDiractionWalkTime = 0.5f;
 
     /// <summary>
     /// Speed of movement
     /// </summary>
-    public float speed = 1.0f;
+    public float Speed = 1.0f;
 
-    private bool diractionLeft = true;
+    private bool DiractionLeft = true;
 
-    private float timeOut = 0.0f;
+    private float TimeOut = 0.0f;
 
-    private BoxCollider2D characterCollider;
+    private BoxCollider2D CharacterCollider;
 
-    private BoxCollider2D groundCollider;
+    private BoxCollider2D GroundCollider;
 
     // Start is called before the first frame update
     private void Start()
     {
-        timeOut = oneDiractionWalkTime / 2;
+        TimeOut = OneDiractionWalkTime / 2;
     }
 
     // Update is called once per frame
@@ -37,12 +37,13 @@ public class Enemy : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (timeOut + Time.deltaTime >= oneDiractionWalkTime){
-            timeOut = 0.0f;
-            diractionLeft = !diractionLeft;
+        TimeOut += Time.deltaTime;
+        if (TimeOut >= OneDiractionWalkTime){
+            TimeOut = 0.0f;
+            DiractionLeft = !DiractionLeft;
         }
 
-        transform.position = new Vector3(((diractionLeft) ? -1 : 1) * Time.deltaTime * speed, 0.0f, 0.0f) + transform.position;
+        transform.position = new Vector3(((DiractionLeft) ? -1 : 1) * Time.deltaTime * Speed, 0.0f, 0.0f) + transform.position;
     }
 
     private void OnTriggerEnter(Collider collidedObject)
