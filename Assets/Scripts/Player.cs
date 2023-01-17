@@ -67,17 +67,17 @@ public class Player : MonoBehaviour
 	private Animator mAnimator;
 	private BoxCollider2D mAttackCollider;
 	
-	public void AddHealt(float health)
+	public void AddHealth(float health)
 	{
 		Health = Health + health >= MaxHealth ? MaxHealth : Health + health;
 	}
 
-	public void RemoveHealt(float health)
+	public void RemoveHealth(float health)
 	{
 		Health -= health;
 
 		if (Health <= 0.0f)
-			Destroy(this);
+			Destroy(gameObject);
 	}
 
     /// <summary>
@@ -232,7 +232,7 @@ public class Player : MonoBehaviour
 		}
 		else if (collision.name.Contains("Life"))
 		{
-			AddHealt(1.0f);
+			AddHealth(1.0f);
 			Destroy(collision.gameObject);
 		}
     }

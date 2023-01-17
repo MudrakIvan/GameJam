@@ -179,6 +179,8 @@ MonoBehaviour:
   OneDiractionWalkTime: 2
   DyingTime: 0.4
   MaxAgroDistance: 10
+  MaxHealth: 2
+  ActionTimeout: 1
   generatedAfterDie:
   - {fileID: 1995980632380848224, guid: 582055be039dac5479ad0a41f5ed879d, type: 3}
   - {fileID: 3734121720541024725, guid: f33571db088a54546821200d34024b0e, type: 3}

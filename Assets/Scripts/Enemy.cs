@@ -13,6 +13,11 @@ public class Enemy : MonoBehaviour
     public float DyingTime = 0.25f;
 
     public float MaxAgroDistance = 5.0f;
+
+    public float MaxHealth = 2.0f;
+
+    public float ActionTimeout = 1.0f;
+
 	public GameObject[] generatedAfterDie;
 
     [Tooltip("Move speed of the character in m/s")]
@@ -56,11 +61,17 @@ public class Enemy : MonoBehaviour
 	private float mJumpDurationDelta;
 	private float mFallTimeoutDelta;
 
+    private float mAttackTimetOut;
+
+    private float mIncommingDamageTimeOut;
+
     private bool mDying = false;
 
     private bool mHeadingLeft = true;
 
     private float TimeOut = 0.0f;
+
+    private float mHealth;
 
     private BoxCollider2D mCharacterCollider;
 
@@ -80,20 +91,17 @@ public class Enemy : MonoBehaviour
 
         mTargetHorSpeed = Speed;
         mTargetVerSpeed = 0.0f;
+        mAttackTimetOut = 0.0f;
+        mIncommingDamageTimeOut = 0.0f;
 
         mJumpTimeoutDelta = JumpTimeout;
         mJumpDurationDelta = 0.0f;
         mFallTimeoutDelta = FallTimeout;
+        mHealth = MaxHealth;
         mPlayer = GameObject.Find("Player").GetComponent<Player>();
 
         TimeOut = OneDiractionWalkTime / 2;
         RotateEnemy();
-    }
-
-    // Update is called once per frame
-    private void Update()
-    {
-        
     }
 
     private void FixedUpdate()
@@ -101,15 +109,16 @@ public class Enemy : MonoBehaviour
         AnimateCharacter();
         if (!mDying)
         {
+            TimeOutsDecrease();
             JumpAndGravity();
-           
             Move();
         }
     }
-
     private float GetPlayerDistance()
     {
-        return (transform.position - mPlayer?.transform.position ?? new Vector3(0.0f, 0.0f, 0.0f)).magnitude;
+        if (mPlayer == null)
+            return MaxAgroDistance + 1.0f;
+        return (transform.position - mPlayer.transform.position).magnitude;
     }
 
     private void RotateEnemy()
@@ -117,7 +126,7 @@ public class Enemy : MonoBehaviour
         transform.localScale = Vector3.Scale(new Vector3(-1.0f, 1.0f, 1.0f), transform.localScale);
     }
 	
-	private void generateItems()
+	private void GenerateItems()
 	{
 		for (int i = 0; i < generatedAfterDie.Length; i++)
 		{
@@ -126,27 +135,60 @@ public class Enemy : MonoBehaviour
         }
 	}
 
-    private void OnTriggerEnter2D(Collider2D collidedObject)
+    private void TimeOutsDecrease()
+    {
+        mIncommingDamageTimeOut = mIncommingDamageTimeOut - Time.fixedDeltaTime <= 0.0f ? 0.0f : mIncommingDamageTimeOut - Time.fixedDeltaTime;
+        mAttackTimetOut = mAttackTimetOut - Time.fixedDeltaTime <= 0.0f ? 0.0f : mAttackTimetOut - Time.fixedDeltaTime;
+    }
+
+    private void OnTriggerStay2D(Collider2D collidedObject)
+    {
+        OnTrigger(collidedObject);
+    }
+
+    private void OnTrigger(Collider2D collidedObject)
     {
         if ((collidedObject.name != "Player" && collidedObject.name != "Model") || mDying)
-        {
             return;
-        }
 
         var player = collidedObject.gameObject.GetComponentInParent<Player>();
 
+        if (player == null)
+            return;
+
         if (player.IsAttacking && collidedObject.name == "Model")
         {
-            Invoke(nameof(generateItems), 0.5f * DyingTime);
-            Destroy(gameObject, DyingTime);			
-            mDying = true;
+            if (mIncommingDamageTimeOut <= 0.0f)
+            {
+                RemoveHealth(1.0f);
+                mIncommingDamageTimeOut = ActionTimeout;
+            }
             return;
         }
 
         if (collidedObject.name == "Player")
         {
-            player.RemoveHealt(1.0f);
+            if (mAttackTimetOut <= 0.0f)
+            {
+                player.RemoveHealth(1.0f);
+                mAttackTimetOut = ActionTimeout;
+            }
         }
+    }
+
+    private void RemoveHealth(float health)
+    {
+        mHealth -= health;
+        if (mHealth <= 0.0f){
+            DestroyEnemy();
+        }
+    }
+
+    private void DestroyEnemy()
+    {
+        Invoke(nameof(GenerateItems), 0.5f * DyingTime);
+        Destroy(gameObject, DyingTime);			
+        mDying = true;
     }
 
     /// <summary>
@@ -203,7 +245,7 @@ public class Enemy : MonoBehaviour
 
     private void RotateToPlayer()
     {
-        bool headLeft = transform.position.x > (mPlayer?.transform.position.x ?? 0.0);
+        bool headLeft = transform.position.x > (mPlayer == null ? 0.0f : mPlayer.transform.position.x);
         
         if (headLeft != mHeadingLeft)
             RotateEnemy();
