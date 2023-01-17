@@ -191,7 +191,8 @@ public class Character2DMovement : MonoBehaviour
 
 		// Change of direction
 		if (mHeadingRight != headingRight){
-			transform.localRotation *= Quaternion.Euler(0.0f, 180.0f, 0.0f);
+			//transform.localRotation *= Quaternion.Euler(0.0f, 180.0f, 0.0f);
+			transform.localScale = Vector3.Scale(new Vector3(-1.0f, 1.0f, 1.0f), transform.localScale);
 		}
 
 		mHeadingRight = headingRight;
