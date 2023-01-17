@@ -17,10 +17,6 @@ public class InputManager : MonoBehaviour
 	public bool crouch;
 	public bool attack = false;
 
-	public bool Escape {get {bool val = escape; escape = false; return val;}}
-
-	private bool escape = false;
-
 	[Header("Movement Settings")]
 	public bool analogMovement;
 
@@ -52,9 +48,6 @@ public class InputManager : MonoBehaviour
 	public void OnLeftClick(InputValue value)
 	{ LeftClickInput(value.isPressed); }
 
-	public void OnEscape(InputValue value)
-	{ EscapeInput(value.isPressed); }
-
 #else
 // old input sys if we do decide to have it (most likely wont)...
 #endif
@@ -77,9 +70,6 @@ public class InputManager : MonoBehaviour
 	
 	public void LeftClickInput(bool newLeftClickState)
 	{ attack = newLeftClickState; }
-
-	public void EscapeInput(bool newEscapeState)
-	{ escape = newEscapeState; }
 
 #if !UNITY_IOS || !UNITY_ANDROID
 

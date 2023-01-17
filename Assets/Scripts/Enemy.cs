@@ -123,7 +123,7 @@ public class Enemy : MonoBehaviour
             return;
         }
 
-        var player = collidedObject.gameObject.GetComponentInParent<Character2DMovement>();
+        var player = collidedObject.gameObject.GetComponentInParent<Player>();
 
         if (player.IsAttacking && collidedObject.name == "Model")
         {

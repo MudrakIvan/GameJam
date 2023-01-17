@@ -2019,7 +2019,6 @@ GameObject:
   - component: {fileID: 875110105}
   - component: {fileID: 875110109}
   - component: {fileID: 875110111}
-  - component: {fileID: 875110110}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2122,27 +2121,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 1575796745}
---- !u!114 &875110110
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 875110104}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fa58d267f544be4fafaac24c45b4ede, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  move: {x: 0, y: 0}
-  look: {x: 0, y: 0}
-  jump: 0
-  sprint: 0
-  crouch: 0
-  attack: 0
-  analogMovement: 0
-  cursorLocked: 1
-  cursorInputForLook: 1
 --- !u!114 &875110111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23551,7 +23529,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1448705072}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 875110109}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+        m_MethodName: ResumeGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1448705072
 MonoBehaviour:
   m_ObjectHideFlags: 0

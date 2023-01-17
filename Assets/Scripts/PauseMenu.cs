@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseMenuUI;
+
+    public static PauseMenu Instance;
 
     private InputManager mInput;
 
@@ -13,30 +16,36 @@ public class PauseMenu : MonoBehaviour
     private void Start()
     {
         mInput = GetComponent<InputManager>();
+        Instance = this;
     }
 
-    void ResumeGame(){
+    public void ResumeGame()
+    {
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1.0f;
         GamePaused = false;
     }
 
-    void PauseGame(){
+    public void PauseGame()
+    {
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0.0f;
         GamePaused = true;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnPause(InputValue value)
     {
-        if(mInput.Escape){
-            if(GamePaused){
-                ResumeGame();
-            }
-            else{
-                PauseGame();
-            }
+        if (!value.isPressed){
+            return;
+        }
+
+        if (GamePaused)
+        {
+            ResumeGame();
+        }
+        else
+        {
+            PauseGame();
         }
     }
 }

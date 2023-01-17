@@ -8,7 +8,7 @@ using System.Linq;
 /// <summary>
 /// Simple 2D character movement processor.
 /// </summary>
-public class Character2DMovement : MonoBehaviour
+public class Player : MonoBehaviour
 {
 	[Header("Player")]
 	[Tooltip("Move speed of the character in m/s")]

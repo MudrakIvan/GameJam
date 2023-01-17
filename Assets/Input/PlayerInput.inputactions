@@ -52,12 +52,12 @@
                 },
                 {
                     "name": "Left Click",
-                    "type": "Value",
+                    "type": "PassThrough",
                     "id": "9608a8c4-3acd-4e0f-8ca0-fe101ecabb5f",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": true
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Point",
@@ -69,7 +69,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Escape",
+                    "name": "Pause",
                     "type": "Value",
                     "id": "08bf1124-92ee-449e-af89-82007cef86f5",
                     "expectedControlType": "",
@@ -207,7 +207,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "M&K",
-                    "action": "Escape",
+                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
