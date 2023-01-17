@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using System.Linq;
 
 /// <summary>
 /// Simple 2D character movement processor.
@@ -59,8 +60,8 @@ public class Character2DMovement : MonoBehaviour
 	
 	private Character2DController mController;
 	private InputManager mInput;
-
 	private Animator mAnimator;
+	private BoxCollider2D mAttackCollider;
 	
     /// <summary>
     /// Called before the first frame update.
@@ -70,6 +71,7 @@ public class Character2DMovement : MonoBehaviour
         mController = GetComponent<Character2DController>();
         mInput = GetComponent<InputManager>();
 		mAnimator = GetComponentInChildren<Animator>();
+		mAttackCollider = GetComponentsInChildren<BoxCollider2D>().Skip(1).First();
 
         mTargetHorSpeed = 0.0f;
         mTargetVerSpeed = 0.0f;
@@ -115,10 +117,12 @@ public class Character2DMovement : MonoBehaviour
 	{
 		if (mInput.attack){
 			mAttackDurationDelta = AttackDuration;
+			mAttackCollider.enabled = true;
 			return;
 		}
 
 		mAttackDurationDelta = (mAttackDurationDelta - Time.fixedDeltaTime) > 0.0f ? mAttackDurationDelta - Time.fixedDeltaTime : 0.0f;
+		mAttackCollider.enabled = IsAttacking;
 	}
 
     /// <summary>

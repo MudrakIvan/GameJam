@@ -118,18 +118,23 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collidedObject)
     {
-        if (collidedObject.name != "Player"){
+        if (collidedObject.name != "Player" && collidedObject.name != "Model")
+        {
             return;
         }
-        
-        var player = collidedObject.gameObject.GetComponent<Character2DMovement>();
 
-        if (player.IsAttacking){
+        var player = collidedObject.gameObject.GetComponentInParent<Character2DMovement>();
+
+        if (player.IsAttacking && collidedObject.name == "Model")
+        {
             Destroy(gameObject);
             return;
         }
 
-        Destroy(collidedObject.gameObject);
+        if (collidedObject.name == "Player")
+        {
+            Destroy(collidedObject.gameObject);
+        }
     }
 
     /// <summary>
