@@ -219,6 +219,11 @@ public class Player : MonoBehaviour
 			Destroy(collision.gameObject);
 			gameObject.GetComponentInChildren<CandleScript>().AddIntensity(1);
 		}
+		else if (collision.name.Contains("Life"))
+		{
+			Destroy(collision.gameObject);
+			
+		}
     }
 
     /// <summary>

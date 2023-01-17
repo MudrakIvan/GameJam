@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using static UnityEditor.Progress;
 
 public class Enemy : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class Enemy : MonoBehaviour
     public float OneDiractionWalkTime = 0.5f;
 
     public float DyingTime = 0.25f;
+	public GameObject[] generatedAfterDie;
 
     [Tooltip("Move speed of the character in m/s")]
 	public float Speed = 4.0f;
@@ -120,6 +122,15 @@ public class Enemy : MonoBehaviour
     {
         transform.localRotation *= Quaternion.Euler(0.0f, 180.0f, 0.0f);
     }
+	
+	private void generateItems()
+	{
+		for (int i = 0; i < generatedAfterDie.Length; i++)
+		{
+            var clone = Instantiate(generatedAfterDie[i]);
+            clone.transform.position = transform.position + new Vector3(0.1f * i, -0.5f, 0);
+        }
+	}
 
     private void OnTriggerEnter2D(Collider2D collidedObject)
     {
@@ -132,7 +143,8 @@ public class Enemy : MonoBehaviour
 
         if (player.IsAttacking && collidedObject.name == "Model")
         {
-            Destroy(gameObject, DyingTime);
+            Invoke(nameof(generateItems), 0.5f * DyingTime);
+            Destroy(gameObject, DyingTime);			
             mDying = true;
             return;
         }
