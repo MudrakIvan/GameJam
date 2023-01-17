@@ -215,14 +215,14 @@ MonoBehaviour:
   oneWayPlatformMask:
     serializedVersion: 2
     m_Bits: 4096
-  slopeLimit: 30
+  slopeLimit: 60
   jumpingThreshold: 0.07
   slopeSpeedMultiplier:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: -100.49411
-      value: 0.99998474
+      time: -196.00682
+      value: 1.10009
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -230,8 +230,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0
-      value: 1
+      time: -47.914223
+      value: 0.9997711
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -239,8 +239,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 101.25
-      value: 1.0000209
+      time: 98.569885
+      value: 1.099203
       inSlope: 0
       outSlope: 0
       tangentMode: 0

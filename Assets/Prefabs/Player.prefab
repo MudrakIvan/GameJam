@@ -497,7 +497,7 @@ MonoBehaviour:
   oneWayPlatformMask:
     serializedVersion: 2
     m_Bits: 4096
-  slopeLimit: 86.3
+  slopeLimit: 85
   jumpingThreshold: 0.07
   slopeSpeedMultiplier:
     serializedVersion: 2
@@ -579,3 +579,4 @@ MonoBehaviour:
   JumpTimeout: 0.1
   FallTimeout: 0.15
   AttackDuration: 0.5
+  MaxHealth: 5
