@@ -203,15 +203,6 @@ public class Character2DController : MonoBehaviour
         }
     }
 
-    // /// <summary>
-    // /// Callback when the current character changes.
-    // /// </summary>
-    // void OnCharacterChange(CharacterSelector selector)
-    // {
-    //     boxCollider.size = selector.charCollider.size;
-    //     boxCollider.offset = selector.charCollider.offset;
-    // }
-
     void Start()
     { }
 
