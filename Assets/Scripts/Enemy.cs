@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
-using static UnityEditor.Progress;
 
 public class Enemy : MonoBehaviour
 {
@@ -13,6 +11,8 @@ public class Enemy : MonoBehaviour
     public float OneDiractionWalkTime = 0.5f;
 
     public float DyingTime = 0.25f;
+
+    public float MaxAgroDistance = 5.0f;
 	public GameObject[] generatedAfterDie;
 
     [Tooltip("Move speed of the character in m/s")]
@@ -70,6 +70,8 @@ public class Enemy : MonoBehaviour
 
     private Animator mAnimator;
 
+    private Player mPlayer;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -82,7 +84,7 @@ public class Enemy : MonoBehaviour
         mJumpTimeoutDelta = JumpTimeout;
         mJumpDurationDelta = 0.0f;
         mFallTimeoutDelta = FallTimeout;
-
+        mPlayer = GameObject.Find("Player").GetComponent<Player>();
 
         TimeOut = OneDiractionWalkTime / 2;
         RotateEnemy();
@@ -96,26 +98,18 @@ public class Enemy : MonoBehaviour
 
     private void FixedUpdate()
     {
-        TimeOut += Time.deltaTime;
-        if (TimeOut >= OneDiractionWalkTime){
-            TimeOut = 0.0f;
-            mHeadingLeft = !mHeadingLeft;
-			RotateEnemy();
-        }
-
         AnimateCharacter();
         if (!mDying)
         {
-            MoveHorizontal();
-	        JumpAndGravity();
-            var movement = new Vector3(
-                mHorizontalSpeed * ((mHeadingLeft) ? -1 : 1),
-                mVerticalSpeed,
-                0.0f
-            );
-            
-            mController.Move(movement * Time.fixedDeltaTime);
+            JumpAndGravity();
+           
+            Move();
         }
+    }
+
+    private float GetPlayerDistance()
+    {
+        return (transform.position - mPlayer?.transform.position ?? new Vector3(0.0f, 0.0f, 0.0f)).magnitude;
     }
 
     private void RotateEnemy()
@@ -151,10 +145,7 @@ public class Enemy : MonoBehaviour
 
         if (collidedObject.name == "Player")
         {
-            player.Health--;
-            if (player.Health == 0){
-                Destroy(collidedObject.gameObject);
-            }
+            player.RemoveHealt(1.0f);
         }
     }
 
@@ -182,6 +173,44 @@ public class Enemy : MonoBehaviour
 		{ mHorizontalSpeed = mTargetHorSpeed; }
     }
     
+    private void Move()
+    {
+        if (GetPlayerDistance() > MaxAgroDistance)
+            CheckMoveRotation();
+        else
+            RotateToPlayer();
+
+        MoveHorizontal();
+        
+        var movement = new Vector3(
+            mHorizontalSpeed * ((mHeadingLeft) ? -1 : 1),
+            mVerticalSpeed,
+            0.0f
+        );
+        
+        mController.Move(movement * Time.fixedDeltaTime);
+    }
+
+    private void CheckMoveRotation()
+    {
+        TimeOut += Time.deltaTime;
+        if (TimeOut >= OneDiractionWalkTime){
+            TimeOut = 0.0f;
+            mHeadingLeft = !mHeadingLeft;
+			RotateEnemy();
+        }
+    }
+
+    private void RotateToPlayer()
+    {
+        bool headLeft = transform.position.x > (mPlayer?.transform.position.x ?? 0.0);
+        
+        if (headLeft != mHeadingLeft)
+            RotateEnemy();
+
+        mHeadingLeft = headLeft;
+    }
+
     /// <summary>
     /// Perform vertical movement calculations.
     /// </summary>
