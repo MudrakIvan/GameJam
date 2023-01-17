@@ -176,6 +176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OneDiractionWalkTime: 2
+  DyingTime: 0.4
   Speed: 1
   RotationSpeed: 1
   SpeedChangeRate: 10
@@ -256,7 +257,7 @@ Animator:
   m_GameObject: {fileID: 1152009765725599846}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d0100e9e13c3979428974ddfb995099a, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
