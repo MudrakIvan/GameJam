@@ -41,6 +41,12 @@ public class BackgorundLoop : MonoBehaviour
 
         Destroy(clone);
         Destroy(obj.GetComponent<SpriteRenderer>());
+        BackgrounSwitcher bs;
+        if ((bs = obj.GetComponent<BackgrounSwitcher>()) != null)
+        {
+            Destroy(bs);
+        }
+        
     }
 
     void LateUpdate()
