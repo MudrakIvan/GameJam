@@ -27,6 +27,7 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         TimeOut = OneDiractionWalkTime / 2;
+        RotateEnemy();
     }
 
     // Update is called once per frame
@@ -41,9 +42,15 @@ public class Enemy : MonoBehaviour
         if (TimeOut >= OneDiractionWalkTime){
             TimeOut = 0.0f;
             DiractionLeft = !DiractionLeft;
+			RotateEnemy();
         }
 
         transform.position = new Vector3(((DiractionLeft) ? -1 : 1) * Time.deltaTime * Speed, 0.0f, 0.0f) + transform.position;
+    }
+
+    private void RotateEnemy()
+    {
+        transform.localRotation *= Quaternion.Euler(0.0f, 180.0f, 0.0f);
     }
 
     private void OnTriggerEnter(Collider collidedObject)
