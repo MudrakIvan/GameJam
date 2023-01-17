@@ -37,6 +37,11 @@ public class Character2DMovement : MonoBehaviour
 	[Tooltip("Time required to pass before entering the fall state. Useful for walking down stairs")]
 	public float FallTimeout = 0.15f;
 
+	public float AttackDuration = 0.5f;
+
+	[HideInInspector]
+	public bool IsAttacking => mAttackDurationDelta > 0.0f;
+
 	private float mTargetHorSpeed;
 	private float mHorizontalSpeed;
 	private float mTargetVerSpeed;
@@ -47,6 +52,8 @@ public class Character2DMovement : MonoBehaviour
 	private float mJumpTimeoutDelta;
 	private float mJumpDurationDelta;
 	private float mFallTimeoutDelta;
+
+	private float mAttackDurationDelta;
 
 	private bool mHeadingRight;
 	
@@ -70,6 +77,7 @@ public class Character2DMovement : MonoBehaviour
         mJumpTimeoutDelta = JumpTimeout;
         mJumpDurationDelta = 0.0f;
         mFallTimeoutDelta = FallTimeout;
+		mAttackDurationDelta = 0.0f;
 
         mHeadingRight = true;
     }
@@ -89,6 +97,7 @@ public class Character2DMovement : MonoBehaviour
     /// </summary>
     void FixedUpdate ()
     {
+		CharacterAttack();
 	    MoveHorizontal();
 	    JumpAndGravity();
 	    AnimateCharacter();
@@ -101,6 +110,16 @@ public class Character2DMovement : MonoBehaviour
 		
 	    mController.Move(movement * Time.fixedDeltaTime);
     }
+
+	private void CharacterAttack()
+	{
+		if (mInput.attack){
+			mAttackDurationDelta = AttackDuration;
+			return;
+		}
+
+		mAttackDurationDelta = (mAttackDurationDelta - Time.fixedDeltaTime) > 0.0f ? mAttackDurationDelta - Time.fixedDeltaTime : 0.0f;
+	}
 
     /// <summary>
     /// Perform horizontal movement calculations.

@@ -19,6 +19,11 @@ public class ObjectMover : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Target == null)
+        {
+            return;
+        }
+        
         var cameraPos = Target.transform.position;
         gameObject.transform.position = startPosition + new Vector3(cameraPos.x - cameraStartPosition.x, cameraPos.y-cameraStartPosition.y, 0)*MovementMultiplicator;
     }

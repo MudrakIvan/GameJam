@@ -116,11 +116,20 @@ public class Enemy : MonoBehaviour
         transform.localRotation *= Quaternion.Euler(0.0f, 180.0f, 0.0f);
     }
 
-    private void OnTriggerEnter(Collider collidedObject)
+    private void OnTriggerEnter2D(Collider2D collidedObject)
     {
-        if (collidedObject.name == ""){
-            Destroy(gameObject);
+        if (collidedObject.name != "Player"){
+            return;
         }
+        
+        var player = collidedObject.gameObject.GetComponent<Character2DMovement>();
+
+        if (player.IsAttacking){
+            Destroy(gameObject);
+            return;
+        }
+
+        Destroy(collidedObject.gameObject);
     }
 
     /// <summary>
