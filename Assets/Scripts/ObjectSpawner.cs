@@ -15,7 +15,7 @@ public class ObjectSpawner : MonoBehaviour
         {
             var clone = Instantiate(Entity);
             clone.transform.parent = gameObject.transform;
-            clone.transform.position = Positions[i];
+            clone.transform.position = (Vector3)Positions[i] + new Vector3(0,0, gameObject.transform.position.z);
         }
 
         if (DestroyEntity){

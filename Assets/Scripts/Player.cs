@@ -205,6 +205,14 @@ public class Player : MonoBehaviour
 		{ mVerticalSpeed -= Gravity * Time.fixedDeltaTime; }
 	}
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+		if (collision.name.Contains("Flame"))
+		{
+			Debug.Log("HI");
+		}
+    }
+
     /// <summary>
     /// Run animation according to the current state.
     /// </summary>
