@@ -207,9 +207,11 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+		Debug.Log(collision.name);
 		if (collision.name.Contains("Flame"))
 		{
-			Debug.Log("HI");
+			Destroy(collision.gameObject);
+			gameObject.GetComponentInChildren<CandleScript>().AddIntensity(1);
 		}
     }
 

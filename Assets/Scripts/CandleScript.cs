@@ -5,7 +5,9 @@ using UnityEngine;
 public class CandleScript : MonoBehaviour
 {
     public float DecreasePerSecond;
+    public float MaxIntensity;
     private Light candle;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,5 +23,18 @@ public class CandleScript : MonoBehaviour
         {
             candle.intensity = 0;
         }
+    }
+
+    public void AddIntensity(float intensity)
+    {
+        if(candle.intensity + intensity <= MaxIntensity)
+        {
+            candle.intensity += intensity;
+        }
+        else
+        {
+            candle.intensity = MaxIntensity;
+        }
+        
     }
 }
