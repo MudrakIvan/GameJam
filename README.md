@@ -1,6 +1,6 @@
 # Find The Light
 
-This is a game created as a school project. Game was created using Unity Engine.
+This is a game created as a school project. Game was created using Unity Engine. Intended platform is Windows.
 
 It was created by The Glitch Goblins team which consists of members:
 - Ivan Mudrák (@MudrakIvan - xmudra03@stud.fit.vutbr.cz)
