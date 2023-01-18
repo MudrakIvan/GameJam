@@ -76,8 +76,10 @@ public class Player : MonoBehaviour
 	{
 		Health -= health;
 
-		if (Health <= 0.0f)
+		if (Health <= 0.0f){
 			Destroy(gameObject);
+			GameOverMenu.Instance.GameOverShow();
+		}
 	}
 
     /// <summary>

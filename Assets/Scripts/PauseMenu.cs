@@ -57,6 +57,10 @@ public class PauseMenu : MonoBehaviour
             return;
         }
 
+        if (GameOverMenu.Instance.gameOverMenuUI.activeInHierarchy){
+            return;
+        }
+        
         if (GamePaused)
         {
             ResumeGame();
