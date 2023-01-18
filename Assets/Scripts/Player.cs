@@ -142,7 +142,7 @@ public class Player : MonoBehaviour
     /// <summary>
     /// Update called at fixed intervals.
     /// </summary>
-    void FixedUpdate ()
+    void FixedUpdate()
     {
 		CharacterAttack();
 	    MoveHorizontal();

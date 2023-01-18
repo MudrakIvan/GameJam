@@ -5,23 +5,27 @@ using UnityEngine;
 public class CandleScript : MonoBehaviour
 {
     public float DecreasePerSecond;
+    public float RemoveHealthPerSecond = 1.0f;
     public float MaxIntensity;
     private Light candle;
+
+    private Player mPlayer;
 
     // Start is called before the first frame update
     void Start()
     {
         candle = gameObject.GetComponent<Light>();
+        mPlayer = gameObject.GetComponentInParent<Player>();
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        candle.intensity -= Time.deltaTime * DecreasePerSecond;
+        candle.intensity -= Time.fixedDeltaTime * DecreasePerSecond;
         
-        if (candle.intensity < 0 )
+        if (candle.intensity <= 0.0f)
         {
-            candle.intensity = 0;
+            candle.intensity = 0.0f;
+            mPlayer.RemoveHealth(RemoveHealthPerSecond * Time.fixedDeltaTime);
         }
     }
 
