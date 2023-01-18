@@ -124,6 +124,7 @@ MonoBehaviour:
   runSoundEffect: {fileID: 4847881567500034620}
   attackSoundEffect: {fileID: 9123435718747411114}
   jumpSoundEffect: {fileID: 4609693111354620111}
+  dieSoundEffect: {fileID: 0}
 --- !u!82 &4847881567500034620
 AudioSource:
   m_ObjectHideFlags: 0
@@ -886,4 +887,4 @@ MonoBehaviour:
   JumpTimeout: 0.1
   FallTimeout: 0.15
   AttackDuration: 0.5
-  MaxHealth: 5
+  MaxHealth: 10
