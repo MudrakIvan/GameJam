@@ -1,6 +1,6 @@
 # Find The Light
 
-This is a game created as a school project. Game was created using Unity Engine. Intended platform is Windows.
+This is a game created as a school project. The game was created using Unity Engine. The intended platform is Windows.
 
 It was created by The Glitch Goblins team which consists of members:
 - Ivan Mudrák (@MudrakIvan - xmudra03@stud.fit.vutbr.cz)
@@ -11,15 +11,15 @@ The theme for this Game Jam was **Darkness**.
 
 ---
 
-## Game Informations
+## Game Information
 
 >You find yourself inside an unfamiliar forest. You are holding a candle and there are some strange sounds surrounding you. But do not hesitate, you must go on or the darkness may consume you otherwise.
 
 ### Instructions
-Go forward and find your happy ending. Your candle will slowly burn out, when you're surrounded by the darkness your health will rapidly go down. To avoid the darkness pick up *flames* that can be found along the way. These *flames* together with a *heart* can also be obtained by killing a *ghost*. Picking up a heart will provide you with a little bit of healing.
+Go forward and find your happy ending. Your candle will slowly burn out and when you're surrounded by darkness your health will rapidly go down. To avoid the darkness pick up *flames* that can be found along the way. These *flames* together with a *heart* can also be obtained by killing a *ghost*. Picking up a heart will provide you with a little bit of healing.
 
 ### Controls
-Game is controlled by by a keyboard and a mouse:
+The game is controlled by a keyboard and a mouse:
 
 - Mouse Left Click - Attack
 - A - Move Left
