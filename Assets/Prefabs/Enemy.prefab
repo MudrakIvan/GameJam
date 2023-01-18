@@ -182,7 +182,7 @@ MonoBehaviour:
   OneDiractionWalkTime: 2
   DyingTime: 0.4
   MaxAgroDistance: 10
-  MaxHealth: 2
+  MaxHealth: 3
   ActionTimeout: 1
   generatedAfterDie:
   - {fileID: 1995980632380848224, guid: 582055be039dac5479ad0a41f5ed879d, type: 3}
@@ -193,7 +193,7 @@ MonoBehaviour:
   MoveSpeedAnimation: 6
   JumpSpeed: 0.8
   JumpChangeRate: 15
-  JumpDuration: 0.5
+  JumpDuration: 0.2
   Gravity: 15
   JumpTimeout: 0.1
   FallTimeout: 0.15

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Windows;
 
 public class Enemy : MonoBehaviour
 {
@@ -61,6 +62,7 @@ public class Enemy : MonoBehaviour
 	private float mJumpDurationDelta;
 	private float mFallTimeoutDelta;
 
+    private bool shouldJump;
     private float mAttackTimetOut;
 
     private float mIncommingDamageTimeOut;
@@ -162,6 +164,7 @@ public class Enemy : MonoBehaviour
             {
                 RemoveHealth(1.0f);
                 mIncommingDamageTimeOut = ActionTimeout;
+                shouldJump = true;
             }
             return;
         }
@@ -246,10 +249,11 @@ public class Enemy : MonoBehaviour
     private void RotateToPlayer()
     {
         bool headLeft = transform.position.x > (mPlayer == null ? 0.0f : mPlayer.transform.position.x);
+        headLeft = shouldJump ? !headLeft : headLeft;
         
         if (headLeft != mHeadingLeft)
             RotateEnemy();
-
+        
         mHeadingLeft = headLeft;
     }
 
@@ -262,32 +266,38 @@ public class Enemy : MonoBehaviour
 		{
 			mFallTimeoutDelta = FallTimeout;
 
-			// if (mInput.jump && mJumpTimeoutDelta <= 0.0f) // Enemy will not be able to jump
-			// {
-			// 	mTargetVerSpeed = Mathf.Sqrt(JumpSpeed * 2.0f * Gravity);
-			// 	mJumpTimeoutDelta = JumpTimeout;
-			// 	mJumpDurationDelta = JumpDuration; 
-			// }
-			// else
-			// {  }
+			if (shouldJump && mJumpTimeoutDelta <= 0.0f) 
+			{
+			    mTargetVerSpeed = Mathf.Sqrt(JumpSpeed * 2.0f * Gravity);
+			    mJumpTimeoutDelta = JumpTimeout;
+			    mJumpDurationDelta = JumpDuration;                
+            }
+			else
+			{ 
+                mTargetVerSpeed = mVerticalSpeed;
+                
+            }
 
-            mTargetVerSpeed = mVerticalSpeed;
 			
 			if (mJumpTimeoutDelta >= 0.0f)
 			{ mJumpTimeoutDelta -= Time.fixedDeltaTime; }
 		}
-		else
-		{
-            // mInput.jump && mJumpDurationDelta >= 0.0f // Enemy will not be able to jump
-			//	? Mathf.Sqrt(JumpSpeed * 2.0f * Gravity)
-			//	:
-			mTargetVerSpeed = mVerticalSpeed;
+        else
+        {
+            mTargetVerSpeed = shouldJump && mJumpDurationDelta >= 0.0f 
+                ? Mathf.Sqrt(JumpSpeed * 2.0f * Gravity)
+                : mVerticalSpeed;
 			
 			if (mJumpDurationDelta >= 0.0f)
 			{ mJumpDurationDelta -= Time.fixedDeltaTime; }
+            else
+            {
+                shouldJump = false;
+            }
 			
 			if (mFallTimeoutDelta >= 0.0f)
 			{ mFallTimeoutDelta -= Time.fixedDeltaTime; }
+            
 		}
 		
 		var currentVerticalSpeed = mController.velocity.y;
