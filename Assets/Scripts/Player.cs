@@ -61,6 +61,20 @@ public class Player : MonoBehaviour
 	private float mAttackDurationDelta;
 
 	private bool mHeadingRight;
+
+	private bool hurt;
+	private bool mHurt {
+		get 
+		{
+			bool temp = hurt;
+			hurt = false;
+			return temp;
+		}
+		set
+		{
+			hurt = value;
+		}
+	}
 	
 	private Character2DController mController;
 	private InputManager mInput;
@@ -75,6 +89,7 @@ public class Player : MonoBehaviour
 	public void RemoveHealth(float health)
 	{
 		Health -= health;
+		mHurt = true;
 
 		if (Health <= 0.0f){
 			Destroy(gameObject);
@@ -102,6 +117,7 @@ public class Player : MonoBehaviour
 		Health = MaxHealth;
 
         mHeadingRight = true;
+		mHurt = false;
     }
 
     /// <summary>
@@ -269,6 +285,7 @@ public class Player : MonoBehaviour
 			animator.SetBool("Fall", falling);
 			animator.SetBool("Crouch", mInput.crouch);
 			animator.SetBool("Attack", mInput.attack);
+			animator.SetBool("Hurt", mHurt);
 	    }
     }
 }
