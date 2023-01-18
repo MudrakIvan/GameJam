@@ -83,7 +83,7 @@ public class HealthUI : MonoBehaviour
         // Validate the inputs.
         current = Math.Clamp(current, min, max);
         // round of health
-        current = (float)Math.Round(current, 2);
+        current = (float)Math.Round(current, 1);
         
         // Determine the current health level.
         float total = max - min;
