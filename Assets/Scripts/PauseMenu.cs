@@ -8,11 +8,15 @@ public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseMenuUI;
 
+    public GameObject optionsMenuUI;
+
     public static PauseMenu Instance;
 
     private InputManager mInput;
 
     private bool GamePaused = false;
+
+    private bool OptionsShown = false;
 
     [SerializeField] private AudioSource BackgroundMusic;
 
@@ -51,6 +55,20 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1.0f;
     }
 
+    public void OptionsClose()
+    {
+        pauseMenuUI.SetActive(true);
+        OptionsShown = false;
+        optionsMenuUI.SetActive(false);
+    }
+
+    public void OptionsOpen()
+    {
+        pauseMenuUI.SetActive(false);
+        OptionsShown = true;
+        optionsMenuUI.SetActive(true);
+    }
+
     public void OnPause(InputValue value)
     {
         if (!value.isPressed){
@@ -63,7 +81,12 @@ public class PauseMenu : MonoBehaviour
         
         if (GamePaused)
         {
-            ResumeGame();
+            if (OptionsShown){
+                OptionsClose();
+            }
+            else {
+                ResumeGame();
+            }
         }
         else
         {
