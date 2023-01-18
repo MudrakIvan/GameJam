@@ -93,8 +93,10 @@ public class Player : MonoBehaviour
 	public void RemoveHealth(float health)
 	{
 		Health -= health;
-		mHurt = true;
-        HealthUI.Instance.DisplayHealth(Health, MinHealth, MaxHealth);
+		if (health >= 1.0f)
+			mHurt = true;
+        
+		HealthUI.Instance.DisplayHealth(Health, MinHealth, MaxHealth);
 
         if (Health <= MinHealth){
 			Destroy(gameObject);
@@ -142,7 +144,7 @@ public class Player : MonoBehaviour
     /// <summary>
     /// Update called at fixed intervals.
     /// </summary>
-    void FixedUpdate ()
+    void FixedUpdate()
     {
 		CharacterAttack();
 	    MoveHorizontal();
