@@ -553,6 +553,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DecreasePerSecond: 0.2
+  RemoveHealthPerSecond: 0.2
   MaxIntensity: 4
 --- !u!1 &8933083841662988370
 GameObject:

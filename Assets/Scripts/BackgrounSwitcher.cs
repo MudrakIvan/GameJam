@@ -2,12 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class BackgrounSwitcher : MonoBehaviour
 {
     // Start is called before the first frame update
-    public float StartPositionX;
-    public float EndPositionX;
+    public Vector2[] Ranges;
    
     private SpriteRenderer background;
 
@@ -26,13 +24,17 @@ public class BackgrounSwitcher : MonoBehaviour
     void ChangeVisibility()
     {
         background = gameObject.GetComponent<SpriteRenderer>();
-        if (gameObject.transform.position.x >= StartPositionX && gameObject.transform.position.x <= EndPositionX)
+        foreach (var range in Ranges)
         {
-            background.enabled = true;
-        }
-        else
-        {
-            background.enabled = false;
+            if (gameObject.transform.position.x >= range.x && gameObject.transform.position.x <= range.y)
+            {
+                background.enabled = true;
+                break;
+            }
+            else
+            {
+                background.enabled = false;
+            }
         }
     }
 }
