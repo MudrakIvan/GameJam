@@ -11,7 +11,7 @@ public class BackgrounSwitcher : MonoBehaviour
 
     void Awake()
     {
-        
+        background = gameObject.GetComponent<SpriteRenderer>();
         ChangeVisibility();
     }
 
@@ -23,7 +23,6 @@ public class BackgrounSwitcher : MonoBehaviour
     
     void ChangeVisibility()
     {
-        background = gameObject.GetComponent<SpriteRenderer>();
         foreach (var range in Ranges)
         {
             if (gameObject.transform.position.x >= range.x && gameObject.transform.position.x <= range.y)

@@ -13,13 +13,10 @@ public class LightSwitcher : MonoBehaviour
     
     private Light mLight;
     
-    private void Start()
-    {
-        
-    }
 
     void Awake()
     {
+        mLight = gameObject.GetComponent<Light>();
         ChangeVisibility();
     }
 
@@ -33,7 +30,9 @@ public class LightSwitcher : MonoBehaviour
     // Update is called once per frame
     void ChangeVisibility()
     {
-        mLight = gameObject.GetComponent<Light>();
+        if (mLight == null || Target == null)
+            return;
+        
         foreach (var range in Ranges)
         {
             if (Target.transform.position.x >= range.x && Target.transform.position.x <= range.y)
