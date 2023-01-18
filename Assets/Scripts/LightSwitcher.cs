@@ -20,7 +20,6 @@ public class LightSwitcher : MonoBehaviour
 
     void Awake()
     {
-
         ChangeVisibility();
     }
 

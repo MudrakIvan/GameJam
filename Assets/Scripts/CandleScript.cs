@@ -7,6 +7,8 @@ public class CandleScript : MonoBehaviour
     public float DecreasePerSecond;
     public float RemoveHealthPerSecond = 1.0f;
     public float MaxIntensity;
+    public Vector2 ActiveRange;
+
     private Light candle;
 
     private Player mPlayer;
@@ -20,6 +22,13 @@ public class CandleScript : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!(mPlayer.transform.position.x >= ActiveRange[0] && mPlayer.transform.position.x <= ActiveRange[1]))
+        {
+            candle.enabled = false;
+            return;
+        }
+        
+        candle.enabled = true;
         candle.intensity -= Time.fixedDeltaTime * DecreasePerSecond;
         
         if (candle.intensity <= 0.0f)
