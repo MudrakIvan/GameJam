@@ -63,7 +63,8 @@ public class Player : MonoBehaviour
 	private bool mHeadingRight;
 
 	private bool hurt;
-	private bool mHurt {
+	private bool mHurt
+	{
 		get 
 		{
 			bool temp = hurt;
