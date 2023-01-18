@@ -8,6 +8,7 @@ public class SoundEffects : MonoBehaviour
     public AudioSource runSoundEffect;
     public AudioSource attackSoundEffect;
     public AudioSource jumpSoundEffect;
+    public AudioSource dieSoundEffect;
 
     // Start is called before the first frame update
     void Start()
@@ -31,5 +32,9 @@ public class SoundEffects : MonoBehaviour
 
     public void JumpSound(){
         jumpSoundEffect.Play();
+    }
+
+    public void DieSound(){
+        dieSoundEffect.Play();
     }
 }
