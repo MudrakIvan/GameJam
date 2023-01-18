@@ -62,6 +62,8 @@ public class Player : MonoBehaviour
 
 	private bool mHeadingRight;
 
+	private const float MinHealth = 0.0f;
+
 	private bool hurt;
 	private bool mHurt
 	{
@@ -85,16 +87,16 @@ public class Player : MonoBehaviour
 	public void AddHealth(float health)
 	{
 		Health = Health + health >= MaxHealth ? MaxHealth : Health + health;
-		Debug.Log(Health);
+		HealthUI.Instance.DisplayHealth(Health, MinHealth, MaxHealth);
 	}
 
 	public void RemoveHealth(float health)
 	{
 		Health -= health;
 		mHurt = true;
-        Debug.Log(Health);
+        HealthUI.Instance.DisplayHealth(Health, MinHealth, MaxHealth);
 
-        if (Health <= 0.0f){
+        if (Health <= MinHealth){
 			Destroy(gameObject);
 			GameOverMenu.Instance.GameOverShow();
 		}
@@ -121,6 +123,10 @@ public class Player : MonoBehaviour
 
         mHeadingRight = true;
 		mHurt = false;
+
+		// Init health bar
+		HealthUI.Instance.DisplayHealth(Health, MinHealth, MaxHealth);
+		HealthUI.Instance.SetVisible(true);
     }
 
     /// <summary>
