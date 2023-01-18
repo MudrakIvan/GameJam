@@ -84,14 +84,16 @@ public class Player : MonoBehaviour
 	public void AddHealth(float health)
 	{
 		Health = Health + health >= MaxHealth ? MaxHealth : Health + health;
+		Debug.Log(Health);
 	}
 
 	public void RemoveHealth(float health)
 	{
 		Health -= health;
 		mHurt = true;
+        Debug.Log(Health);
 
-		if (Health <= 0.0f){
+        if (Health <= 0.0f){
 			Destroy(gameObject);
 			GameOverMenu.Instance.GameOverShow();
 		}
